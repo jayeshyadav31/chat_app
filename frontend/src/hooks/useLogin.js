@@ -17,10 +17,14 @@ import toast from "react-hot-toast";
 				headers: { "Content-Type": "application/json" },
                 body:JSON.stringify({userName,password})
             })
+            if(!res.ok){
+                console.log('error in login part');
+            }
             const data = await res.json();
 			if (data.error) {
 				throw new Error(data.error);
 			}
+            console.log("logged in succesfully");
 			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
         } catch (error) {
